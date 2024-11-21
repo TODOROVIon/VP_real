@@ -18,17 +18,19 @@ class RegisterController extends AbstractController
     // $request c'est la variable qui ecoute si notre formulaire est bien remplis
     // $entity manager du doctrine envoi notre formulaire dans la BDD
     {
-        // var_dump(..) = dd() ;
+                // var_dump(..) = dd() ;
         //dd($request);
 
         $user = new User();
-        $form = $this->createForm(RegisterUserType::class,$user); // si apres la class on mis pas notre le parametre de user, il n'enregistre pas
+        //$form = $this->createForm(RegisterUserType::class,$user);
 
+        $form = $this->createForm(RegisterUserType::class, $user);
+    // si apres la class on mis pas notre le parametre de user, il n'enregistre
         $form->handleRequest($request);     // => on ecoute notre variable $request avec parametres handleRequest
 
         if ($form->isSubmitted() && $form->isValid()){
-            // die('Formulaire Soumis');
-            //dd($user);
+            
+            dd($form->getData());
             $entityManager->persist($user); //prendre en parametre une objet
             $entityManager->flush(); //pour enregistrer le donnees
         }
