@@ -5,21 +5,36 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegisterUserType;
 //use App\Controller\RegisterUserType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class RegisterController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
-    public function index(): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    // $request c'est la variable qui ecoute si notre formulaire est bien remplis
+    // $entity manager du doctrine envoi notre formulaire dans la BDD
     {
-        
-        //$user = new User();
-        //$form = $this->createForm(RegisterUserType::class,$user);
+        // var_dump(..) = dd() ;
+        //dd($request);
 
-        $form = $this -> createForm(RegisterUserType::class);
+        $user = new User();
+        $form = $this->createForm(RegisterUserType::class,$user); // si apres la class on mis pas notre le parametre de user, il n'enregistre pas
+
+        $form->handleRequest($request);     // => on ecoute notre variable $request avec parametres handleRequest
+
+        if ($form->isSubmitted() && $form->isValid()){
+            // die('Formulaire Soumis');
+            //dd($user);
+            $entityManager->persist($user); //prendre en parametre une objet
+            $entityManager->flush(); //pour enregistrer le donnees
+        }
         
+        // si le formulaire est soumis, alors tu enregistre dans BDD, tu envoies un message de confirmation du compte bien cree
+
         return $this -> render('register/index.html.twig',[
             'registerForm' => $form->createView()
         ]);
