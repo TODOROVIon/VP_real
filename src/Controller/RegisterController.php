@@ -15,15 +15,16 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class RegisterController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
-    public function index(Request $request, EntityManagerInterface $entityManager,UserPasswordHasherInterface $passwordHasher): Response
+    public function index(
+        Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher
+     ): Response
     // $request c'est la variable qui ecoute si notre formulaire est bien remplis
     // $entity manager du doctrine envoi notre formulaire dans la BDD
     {
-                // var_dump(..) = dd() ;
+        // var_dump(..) = dd() ;
         //dd($request);
 
         $user = new User();
-        //$form = $this->createForm(RegisterUserType::class,$user);
 
         $form = $this->createForm(RegisterUserType::class, $user);
     // si apres la class on mis pas notre le parametre de user, il n'enregistre
