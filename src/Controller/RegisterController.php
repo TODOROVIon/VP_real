@@ -6,15 +6,16 @@ use App\Entity\User;
 use App\Form\RegisterUserType;
 //use App\Controller\RegisterUserType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegisterController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager,UserPasswordHasherInterface $passwordHasher): Response
     // $request c'est la variable qui ecoute si notre formulaire est bien remplis
     // $entity manager du doctrine envoi notre formulaire dans la BDD
     {
@@ -30,7 +31,13 @@ class RegisterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             
-            dd($form->getData());
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $form->get('plainPassword')->getData()
+            );
+            $user->setPassword($hashedPassword);
+
+            // dd($form->getData());
             $entityManager->persist($user); //prendre en parametre une objet
             $entityManager->flush(); //pour enregistrer le donnees
         }
