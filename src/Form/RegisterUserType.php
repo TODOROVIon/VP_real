@@ -26,15 +26,6 @@ class RegisterUserType extends AbstractType
                 ]
             ])
 
-            //->add('roles')
-
-            // ->add('password',PasswordType::class,[
-            //     'label' => "Votre mot de passe",
-            //     'attr' => [
-            //         'placeholder' => "Votre mot de passe",
-            //     ]
-            // ])
-
             ->add('plainPassword',RepeatedType::class,[
                 'type' => PasswordType::class,
                 'constraints' => [
