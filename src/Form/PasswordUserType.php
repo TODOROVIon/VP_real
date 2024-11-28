@@ -18,14 +18,15 @@ class PasswordUserType extends AbstractType
         $builder
             ->add('actualPassword',PasswordType::class,[
                 'label'=>"Votre mot de passe actuel",
+                'mapped' =>false,
                 'attr' => [
                         'placeholder' => "Votre mot de passe actuel. ",
                  ],
-                 'mapped' =>false
             ])
 
-            ->add('plainPassword',RepeatedType::class,[
+            ->add('newPassword',RepeatedType::class,[
                 'type' => PasswordType::class,
+                'mapped' => false,
                 'constraints' => [
                     new Length([
                         'min' => 4,
@@ -45,7 +46,6 @@ class PasswordUserType extends AbstractType
                          'placeholder' => "Confirmez votre nouveau mot de passe. ",
                      ],
                  ],
-                'mapped' => false,
                 ])
 
                 ->add('submit',SubmitType::class,[

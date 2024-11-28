@@ -15,7 +15,10 @@ class RegisterController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
     public function index(
-        Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher
+        Request $request,
+         EntityManagerInterface $entityManager,
+         UserPasswordHasherInterface $passwordHasher
+         
      ): Response
     // $request c'est la variable qui ecoute si notre formulaire est bien remplis
     // $entity manager du doctrine envoi notre formulaire dans la BDD
