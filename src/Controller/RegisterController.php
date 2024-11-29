@@ -23,9 +23,6 @@ class RegisterController extends AbstractController
     // $request c'est la variable qui ecoute si notre formulaire est bien remplis
     // $entity manager du doctrine envoi notre formulaire dans la BDD
     {
-        // var_dump(..) = dd() ;
-        //dd($request);
-
         $user = new User();
 
         $form = $this->createForm(RegisterUserType::class, $user);
@@ -41,8 +38,8 @@ class RegisterController extends AbstractController
             $user->setPassword($hashedPassword);
 
             // dd($form->getData());
-            $entityManager->persist($user); //prendre en parametre une objet
-            $entityManager->flush(); //pour enregistrer le donnees
+            $entityManager->persist($user); //prendre en parametre une objet et creer notre variable dans BDD
+            $entityManager->flush(); //pour enregistrer le donnees deja existente
         }
         
         // si le formulaire est soumis, alors tu enregistre dans BDD, tu envoies un message de confirmation du compte bien cree
