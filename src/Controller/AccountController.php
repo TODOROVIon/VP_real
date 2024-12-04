@@ -36,6 +36,9 @@ class AccountController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager->flush();        // avec variable $entityManager->flush, on envoi notre information dans la BDD
+            $this->addFlash(
+                'success',
+                'Votre changement passé tres bien!');
         }
 
         return $this->render('account/password.html.twig',[

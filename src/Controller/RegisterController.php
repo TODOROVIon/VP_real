@@ -31,14 +31,20 @@ class RegisterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             
+            
             $hashedPassword = $passwordHasher->hashPassword(
                 $user,
                 $form->get('plainPassword')->getData()
             );
             $user->setPassword($hashedPassword);
-
+            
             $entityManager->persist($user); //prendre en parametre une objet et creer notre variable dans BDD
             $entityManager->flush(); //pour enregistrer le donnees deja existente
+            $this->addFlash(
+                'success',
+                'Votre compte a etais creer');
+
+            return $this->redirectToRoute('app_login');
         }
         
         // si le formulaire est soumis, alors tu enregistre dans BDD, tu envoies un message de confirmation du compte bien cree
