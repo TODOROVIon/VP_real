@@ -61,9 +61,7 @@ class PasswordUserType extends AbstractType
                     $form = $event->getForm();  // recuperation de notre formulaire
                     $user = $form->getConfig()->getOptions()['data'];
                     $passwordHasher = $form->getConfig()->getOptions()['passwordHasher'];
-                    // dd($form->getConfig()->getOptions()['data']);
-                    // dd($user->getPassword());
-
+                    
                     // 1. Recuperer le mot de passe saisi par l'utilisateur
                     $isValid = $passwordHasher->isPasswordValid(
                         $user,

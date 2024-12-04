@@ -37,7 +37,6 @@ class RegisterController extends AbstractController
             );
             $user->setPassword($hashedPassword);
 
-            // dd($form->getData());
             $entityManager->persist($user); //prendre en parametre une objet et creer notre variable dans BDD
             $entityManager->flush(); //pour enregistrer le donnees deja existente
         }

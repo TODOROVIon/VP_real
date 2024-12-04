@@ -20,7 +20,11 @@ class AccountController extends AbstractController
     }
 
     #[Route('/compte/modifier-pwd', name: 'app_account_modify_pwd')]
-    public function password(Request $request,UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    public function password(
+        Request $request,
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface $entityManager
+    ): Response
     {
         $user = $this->getUser();
         
@@ -31,8 +35,7 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            dd($form->getData());
-            // $entityManager->flush();        // avec variable $entityManager->flush, on envoi notre information dans la BDD
+            $entityManager->flush();        // avec variable $entityManager->flush, on envoi notre information dans la BDD
         }
 
         return $this->render('account/password.html.twig',[
