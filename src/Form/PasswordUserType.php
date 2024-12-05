@@ -62,18 +62,12 @@ class PasswordUserType extends AbstractType
                     $user = $form->getConfig()->getOptions()['data'];
                     $passwordHasher = $form->getConfig()->getOptions()['passwordHasher'];
                     
-                    // 1. Recuperer le mot de passe saisi par l'utilisateur
+                    // 1. Recuperer et verifier le mot de passe saisi par l'utilisateur
                     $isValid = $passwordHasher->isPasswordValid(
                         $user,
                         $form->get('actualPassword')->getData()
                     );
                     // dd($isValid);
-                    
-                    // 2. Recuperer le mot de passe actuel en BDD
-                    // $actualPwdDatabase = $user->getPassword();  // une modalité, plus haut on recupér et comparé notre MDP
-                            // dump($actualPwd); // affiche notre MDP en clair
-                            // dd($actualPwdDatabase); // affiche notre MDP crypte importé du notre base de donnees
-
                     // 3. Si c'est != envoyer une erreur
                     if (!$isValid){
                         $form->get('actualPassword')->addError(new FormError('Votre Mot De Passe actuel n\'est pas conforme'));

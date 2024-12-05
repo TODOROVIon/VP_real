@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+// USE -> je appelle un repertoire
 use App\Entity\User;
 use App\Form\RegisterUserType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,5 +57,4 @@ class RegisterController extends AbstractController
 }
 
 
-// USE -> je appelle un repertoire
 // NAMESPACE -> Je definis un repertoire
