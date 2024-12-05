@@ -36,6 +36,7 @@ class AccountController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             // dd($form);
+            
             $entityManager->flush();        // avec variable $entityManager->flush, on envoi notre information dans la BDD
             $this->addFlash(
                 'success',
