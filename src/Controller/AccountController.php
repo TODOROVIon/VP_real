@@ -36,8 +36,18 @@ class AccountController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             // dd($form);
-            
+            $plainPassword = $form->get('plainPassword')->getData();
+            if ($plainPassword) {
+                // Hacher le mot de passe avec le passwordHasher
+                $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
+                
+                // Mettre à jour l'entité utilisateur avec le mot de passe haché
+                $user->setPassword($hashedPassword);
+            }
+    
+
             $entityManager->flush();        // avec variable $entityManager->flush, on envoi notre information dans la BDD
+           
             $this->addFlash(
                 'success',
                 'Votre changement passé tres bien!');
