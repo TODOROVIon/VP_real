@@ -43,7 +43,7 @@ class RegisterController extends AbstractController
             $entityManager->flush(); //pour enregistrer le donnees deja existente
             $this->addFlash(
                 'success',
-                'Votre compte a etais creer');
+                'Votre compte a etais creer, veuillez vous connecter');
 
             return $this->redirectToRoute('app_login');
         }
