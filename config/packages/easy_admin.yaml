@@ -1,0 +1,12 @@
+easy_admin:
+    entities:
+        # Définir les entités à afficher dans le tableau de bord
+        App\Entity\User:
+            class: App\Entity\User
+            list:
+                fields:
+                    - id
+                    - email
+                    - password
+                    - firstname
+                    - lastname

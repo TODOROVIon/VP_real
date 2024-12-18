@@ -1,0 +1,6 @@
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    default_path: '%kernel.project_dir%/templates'
+    # Vous pouvez également configurer le cache ici pour l'environnement de développement
+    cache: false
