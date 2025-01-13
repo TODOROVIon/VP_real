@@ -1231,16 +1231,16 @@
         },
         {
             "name": "easycorp/easyadmin-bundle",
-            "version": "v4.20.6",
+            "version": "v4.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-                "reference": "d6dbcc77ff5aa7e8864923a67a02ebf6d0066ee6"
+                "reference": "c0da0bf125be98d3482b6c440e363532d871f7a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/d6dbcc77ff5aa7e8864923a67a02ebf6d0066ee6",
-                "reference": "d6dbcc77ff5aa7e8864923a67a02ebf6d0066ee6",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/c0da0bf125be98d3482b6c440e363532d871f7a1",
+                "reference": "c0da0bf125be98d3482b6c440e363532d871f7a1",
                 "shasum": ""
             },
             "require": {
@@ -1287,7 +1287,8 @@
                 "symfony/dom-crawler": "^5.4|^6.0|^7.0",
                 "symfony/expression-language": "^5.4|^6.0|^7.0",
                 "symfony/phpunit-bridge": "^6.1|^7.0",
-                "symfony/process": "^5.4|^6.0|^7.0"
+                "symfony/process": "^5.4|^6.0|^7.0",
+                "symfony/web-link": "^5.4|^6.0|^7.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1319,7 +1320,7 @@
             ],
             "support": {
                 "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
-                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v4.20.6"
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v4.21.0"
             },
             "funding": [
                 {
@@ -1327,7 +1328,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-05T11:24:43+00:00"
+            "time": "2025-01-12T11:03:13+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -8608,16 +8609,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.5.40",
+            "version": "10.5.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "e6ddda95af52f69c1e0c7b4f977cccb58048798c"
+                "reference": "e76586fa3d49714f230221734b44892e384109d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e6ddda95af52f69c1e0c7b4f977cccb58048798c",
-                "reference": "e6ddda95af52f69c1e0c7b4f977cccb58048798c",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e76586fa3d49714f230221734b44892e384109d7",
+                "reference": "e76586fa3d49714f230221734b44892e384109d7",
                 "shasum": ""
             },
             "require": {
@@ -8689,7 +8690,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.40"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.41"
             },
             "funding": [
                 {
@@ -8705,7 +8706,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-21T05:49:06+00:00"
+            "time": "2025-01-13T09:33:05+00:00"
         },
         {
             "name": "sebastian/cli-parser",
