@@ -41,7 +41,7 @@ class ProductCrudController extends AbstractCrudController
             TextField::new('name')->setLabel('Nom')->setHelp('Nom de votre produit'),
             SlugField::new('slug')->setTargetFieldName('name')->setLabel('URL')->setHelp('URL de votre produit generee automatiquement'),
             TextEditorField::new('description')->setLabel('Description')->setHelp('Description de votre produit'),
-            ImageField::new('Illustration')->setLabel('Image')->setUploadDir('/public/uploads')->setHelp('Image du votre produit 600x600'),
+            ImageField::new('Illustration')->setLabel('Image')->setUploadDir('/public/uploads')->setHelp('Image du votre produit 600x600')->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]')->setBasePath('/uploads'),
             NumberField::new('price')->setLabel('Prix H.T.')->setHelp('Pris HT du produit sans sigle'),
             ChoiceField::new('tva')->setLabel('Taux de TVA')->setChoices([
                 '5,5' => '5,5',
