@@ -2,14 +2,42 @@
 
 namespace App\Classe;
 
+use Symfony\Component\HttpFoundation\RequestStack;
+
 class Cart
 {
-    public function add()
+    public function __construct(private RequestStack $requestStack)
     {
+
+    }
+
+    public function add($product)
+    {
+        // dd($product);
         //Appeler la session de symfony
+        $cart = $this->requestStack->getSession()->get('cart'); //permetre le pannier en cours
+        // dd($session);
+        
+        //Ajouter une quantite +1 a mon produit
+        if($cart[$product->getId()]){
+        $cart[$product->getId()] = [
+            'object' => $product,
+            'qty' =>  $cart[$product->getId()]['qty'] + 1
+            ];
+        } else {
+            $cart[$product->getId()] = [
+                'object' => $product,
+                'qty' =>  1
+            ];
+        }
 
         //Creer ma session Cart
+        $this->requestStack->getSession()->set('cart', $cart);
+        // dd($this->requestStack->getSession()->get('cart'));
+    }
 
-        //Ajouter une quantite +1 a mon produit
+    public function getCart()
+    {
+        return $this->requestStack->getSession()->get('cart');
     }
 }
