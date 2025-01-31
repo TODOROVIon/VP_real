@@ -19,7 +19,7 @@ class Cart
         // dd($session);
         
         //Ajouter une quantite +1 a mon produit
-        if($cart[$product->getId()]){
+        if(isset($cart[$product->getId()])){
         $cart[$product->getId()] = [
             'object' => $product,
             'qty' =>  $cart[$product->getId()]['qty'] + 1
@@ -39,5 +39,10 @@ class Cart
     public function getCart()
     {
         return $this->requestStack->getSession()->get('cart');
+    }
+
+    public function remove()
+    {
+        return $this->requestStack->getSession()->remove('cart');
     }
 }
