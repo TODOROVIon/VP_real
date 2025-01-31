@@ -19,7 +19,7 @@
                             <span class="d-block small">Prix unitaire: {{ product.object.priceWt|price }}</span>
                         </div>
                         <div class="col-md-2 test-right">
-                            <span class="badge text-bg-secondary">x{{ product.qty }}</span>
+                            <span class="badge text-bg-secondary">x{{ product.qty }}</span><a href="{{ path('app_cart_add', { id: product.object.id }) }}">+</a>
                         </div>
                         <div class="col-md-2">
                             <strong>{{ (product.qty * product.object.priceWt)|price }}</strong>

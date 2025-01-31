@@ -7,6 +7,7 @@ use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends AbstractController
 {
@@ -19,8 +20,11 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/add{id}', name: 'app_cart_add')]
-    public function add($id, Cart $cart, ProductRepository $productRepository): Response
+    public function add($id, Cart $cart, ProductRepository $productRepository, Request $request): Response
     {
+        // dd($request->headers);      // a faire attentions dans DD aux REFERER, derniere URL
+        // dd($request->headers->get('referer'));
+
         $product = $productRepository->findOneById($id);
         
         $cart->add($product);
@@ -30,9 +34,32 @@ class CartController extends AbstractController
             'success',
             'Produit correctement ajouté a votre panier');
 
-        return $this->redirectToRoute('app_product',[
-            'slug' => $product->getSlug(),
-        ]);
+        // return $this->redirectToRoute('app_product',[
+        //     'slug' => $product->getSlug(),
+        // ]);          // V1
+
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    public function add($id, Cart $cart, ProductRepository $productRepository, Request $request): Response
+    {
+        // dd($request->headers);      // a faire attentions dans DD aux REFERER, derniere URL
+        // dd($request->headers->get('referer'));
+
+        $product = $productRepository->findOneById($id);
+        
+        $cart->add($product);
+        // dd($id);
+
+        $this->addFlash(
+            'success',
+            'Produit correctement ajouté a votre panier');
+
+        // return $this->redirectToRoute('app_product',[
+        //     'slug' => $product->getSlug(),
+        // ]);          // V1
+
+        return $this->redirect($request->headers->get('referer'));
     }
 
     #[Route('/cart/remove', name: 'app_cart_remove')]
