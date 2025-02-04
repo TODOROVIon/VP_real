@@ -41,25 +41,24 @@ class CartController extends AbstractController
         return $this->redirect($request->headers->get('referer'));
     }
 
-    public function add($id, Cart $cart, ProductRepository $productRepository, Request $request): Response
+    #[Route('/cart/decrease{id}', name: 'app_cart_decrease')]
+    public function decrease($id, Cart $cart): Response
     {
         // dd($request->headers);      // a faire attentions dans DD aux REFERER, derniere URL
         // dd($request->headers->get('referer'));
 
-        $product = $productRepository->findOneById($id);
-        
-        $cart->add($product);
+        $cart->decrease($id);
         // dd($id);
 
         $this->addFlash(
             'success',
-            'Produit correctement ajouté a votre panier');
+            'Produit correctement supprimée a votre panier');
 
         // return $this->redirectToRoute('app_product',[
         //     'slug' => $product->getSlug(),
         // ]);          // V1
 
-        return $this->redirect($request->headers->get('referer'));
+        return $this->redirectToRoute('app_cart');
     }
 
     #[Route('/cart/remove', name: 'app_cart_remove')]

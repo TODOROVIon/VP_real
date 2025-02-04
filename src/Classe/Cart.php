@@ -30,11 +30,24 @@ class Cart
                 'qty' =>  1
             ];
         }
-
         //Creer ma session Cart
         $this->requestStack->getSession()->set('cart', $cart);
         // dd($this->requestStack->getSession()->get('cart'));
     }
+
+    public function decrease($id)
+    {
+        $cart = $this->requestStack->getSession()->get('cart');     //notre panier en court 
+
+        if($cart[$id]['qty'] > 1)/*on cherche dans notre variable directement sur son ID apres directement son qty*/{
+            $cart[$id]['qty'] = $cart[$id]['qty'] -1;
+        } else {
+            unset($cart[$id]);//unset -> function PHP qui permet de supprimé une entree de mon tableau
+        }
+
+        $this->requestStack->getSession()->set('cart', $cart);
+    }
+
 
     public function getCart()
     {
