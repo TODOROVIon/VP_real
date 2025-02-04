@@ -48,6 +48,19 @@ class Cart
         $this->requestStack->getSession()->set('cart', $cart);
     }
 
+    public function fullQuantity()
+    {
+        $cart = $this->requestStack->getSession()->get('cart');
+        $quantity = 0;
+
+        foreach ($cart as $product){
+            // dd($product);
+            $quantity = $quantity + $product['qty'];
+        }
+
+        // dd($quantity);
+        return $quantity;
+    }
 
     public function getCart()
     {
