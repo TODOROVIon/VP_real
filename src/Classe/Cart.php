@@ -53,14 +53,36 @@ class Cart
         $cart = $this->requestStack->getSession()->get('cart');
         $quantity = 0;
 
+        if (!isset($cart)){
+            return $quantity;
+        }
+
         foreach ($cart as $product){
             // dd($product);
             $quantity = $quantity + $product['qty'];
         }
-
         // dd($quantity);
         return $quantity;
     }
+
+    public function getTotalWt()
+    {
+        $cart = $this->requestStack->getSession()->get('cart');
+        $price = 0;
+
+        if (!isset($cart)){
+            return $price;
+        }
+
+
+        foreach ($cart as $product){
+            // dd($product);
+            $price = $price + ($product['object']->getPriceWt()/*getPriceWt-function du entity product*/ * $product['qty']);
+        }
+        // dd($quantity);
+        return $price;
+    }
+    
 
     public function getCart()
     {
