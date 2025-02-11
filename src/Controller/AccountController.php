@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
+use App\Form\AddressUserType;
 use App\Form\PasswordUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +21,9 @@ class AccountController extends AbstractController
         return $this->render('account/index.html.twig');
     }
 
+    /*
+    Route pour modifier mot de pass
+    */
     #[Route('/compte/modifier-pwd', name: 'app_account_modify_pwd')]
     public function password(
         Request $request,
@@ -58,6 +63,28 @@ class AccountController extends AbstractController
         ]);
     
     }
+
+    #[Route('/compte/adresses', name: 'app_account_addresses')]
+    public function addresses(): Response
+    {
+        return $this->render('account/addresses.html.twig');
+    }
     
+    #[Route('/compte/adresses/ajouter', name: 'app_account_address_form')]
+    public function addressForm(Request $request): Response
+    {
+        $address = new Address();
+        $form = $this->createForm(AddressUserType::class, $address);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+        }
+
+        return $this->render('account/addressForm.html.twig', [
+            'addressForm' => $form,
+        ]);
+    }
 
 }
