@@ -15,6 +15,13 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AccountController extends AbstractController
 {
+    private $entityManager; /*declaration de parametre*/
+
+
+    public function __construct(EntityManagerInterface $entityManager){
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/compte', name: 'app_account')]
     public function index(): Response
     {
@@ -28,7 +35,6 @@ class AccountController extends AbstractController
     public function password(
         Request $request,
         UserPasswordHasherInterface $passwordHasher,
-        EntityManagerInterface $entityManager
     ): Response
     {
         $user = $this->getUser();
@@ -51,7 +57,7 @@ class AccountController extends AbstractController
             }
     
 
-            $entityManager->flush();        // avec variable $entityManager->flush, on envoi notre information dans la BDD
+            $this->entityManager->flush();        // avec variable $entityManager->flush, on envoi notre information dans la BDD
            
             $this->addFlash(
                 'success',
@@ -74,16 +80,25 @@ class AccountController extends AbstractController
     public function addressForm(Request $request): Response
     {
         $address = new Address();
+        $address->setUser($this->getUser());    /*on enregistre notre user depuis entity user et on prendre le ID de user*/
+
         $form = $this->createForm(AddressUserType::class, $address);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-
+            $this->entityManager->persist($address);
+            $this->entityManager->flush();
+            
+            $this->addFlash(
+                'success',
+                'Votre est correctement sauvegarder!');
+                
+            return $this->redirectToRoute("app_account_addresses");
         }
 
         return $this->render('account/addressForm.html.twig', [
-            'addressForm' => $form,
+            'addressForm' => $form->createView(),
         ]);
     }
 
