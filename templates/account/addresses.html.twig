@@ -13,10 +13,31 @@
                 {% include 'account/_menu.html.twig' %}
             </div>
             <div class="col-md-9">
-                <h3>Mes addresses</h3>
-                <a href="{{ path('app_account_address_form') }}">Ajouter une adresse</a>
-                <hr>
-                Liste de mes adresses
+                <div class="d-flex justify-content-between">
+                    <h3>Mes addresses</h3>
+                    <a href="{{ path('app_account_address_form') }}" class="btn btn-light">Ajouter une adresse</a>
+                </div>
+                {# <hr> #}
+                {# {{ dump(app.user.addresses)}} #}
+                {% if app.user.addresses|length == 0 %}
+                    <p>Vous n'avez pas encore d'adresse enregistré</p>
+                {% else %}
+                    <div class="row">
+                    {% for address in app.user.addresses %}
+                        <div class="col-md-4 mt-2">
+                            {# {{ dump(address) }} #}
+                            <div class="bg-light p-2 text-center">
+                                <strong>{{ address.firstname }} {{ address.lastname }}</strong><br/>
+                                {{ address.address }}<br/>
+                                {{ address.postal }} {{ address.city }}<br/>
+                                {{ address.country }}<br/>
+                                <a href="{{ path('app_account_address_form',{ id : address.id } ) }}" class="small text-secondary">Editer</a>
+                                <a href="{{ path('app_account_address_delete',{ id : address.id } ) }}" class="small text-secondary">Supprimer</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>    

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Address;
 use App\Form\AddressUserType;
 use App\Form\PasswordUserType;
+use App\Repository\AddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -75,12 +76,38 @@ class AccountController extends AbstractController
     {
         return $this->render('account/addresses.html.twig');
     }
-    
-    #[Route('/compte/adresses/ajouter', name: 'app_account_address_form')]
-    public function addressForm(Request $request): Response
+
+    #[Route('/compte/adresses/delete/{id}', name: 'app_account_address_delete')]
+    public function addressDelete(Request $request, $id, AddressRepository $addressRepository): Response
     {
-        $address = new Address();
-        $address->setUser($this->getUser());    /*on enregistre notre user depuis entity user et on prendre le ID de user*/
+        $address = $addressRepository->findOneById($id);
+        if (!$address OR $address->getUser() != $this->getUser()){
+            return $this->redirectToRoute('app_account_addresses');
+        }
+
+        $this->addFlash(
+            'success',
+            'Votre adresse est correctement supprimer!');
+
+        $this->entityManager->remove($address);
+        
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_account_addresses');
+    }
+    
+    #[Route('/compte/adresses/ajouter/{id}', name: 'app_account_address_form', defaults:['id'=>null])]
+    public function addressForm(Request $request, $id, AddressRepository $addressRepository): Response
+    {
+        if ($id){
+            $address = $addressRepository->findOneById($id);
+            if (!$address OR $address->getUser() != $this->getUser()){
+                return $this->redirectToRoute('app_account_addresses');
+            }
+        } else {
+            $address = new Address();
+            $address->setUser($this->getUser());    /*on enregistre notre user depuis entity user et on prendre le ID de user*/
+        }
 
         $form = $this->createForm(AddressUserType::class, $address);
 
