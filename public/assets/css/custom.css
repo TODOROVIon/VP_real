@@ -39,6 +39,8 @@
     overflow-y: hidden;
 }
 
+
+
 .nav-scroller .nav {
     display: flex;
     flex-wrap: nowrap;
@@ -81,4 +83,14 @@
 
 .speed-menu a {
     margin-right: 20px;
+}
+
+#order_addresses .form-check, #order_carriers .form-check {
+    background-color: #48c4c4;
+    padding: 10px 40px;
+}
+
+.small-container{
+    max-width: 800px;
+    margin: 0 auto;
 }
