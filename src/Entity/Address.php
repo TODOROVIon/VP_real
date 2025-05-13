@@ -40,7 +40,11 @@ class Address
 
     public function __tostring()
     {
-        return $this->getFirstname().' '.$this->getLastname().'<br/>'.$this->getAddress().'<br/>'.$this->getCity().' - '.$this->getCountry();
+        return $this->getFirstname().' '
+            .$this->getLastname().'<br/>'
+            .$this->getAddress().'<br/>'
+            .$this->getCity().' - '
+            .$this->getCountry();
     }
 
     public function getId(): ?int

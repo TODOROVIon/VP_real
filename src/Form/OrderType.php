@@ -33,7 +33,7 @@ class OrderType extends AbstractType
             ->add('submit',SubmitType::class,[
                 'label' => "Valider",
                 'attr' => [
-                    'class' => "btn btn-success" // a chercher sur bootstrap la couleur de button
+                    'class' => "w-100 btn btn-success" // a chercher sur bootstrap la couleur de button
                 ]
             ])
         ;

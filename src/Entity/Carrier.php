@@ -26,7 +26,9 @@ class Carrier
     public function __tostring()
     {
         $price = number_format($this->getPrice(),'2', ','). ' €';
-        return $this->getName().'<br/>'.$price.'<br/>'.$this->getDescription();
+        return $this->getName().'<br/>'
+            .$price.'<br/>'
+            .$this->getDescription();
     }
 
     public function getId(): ?int
