@@ -73,11 +73,14 @@ final class OrderController extends AbstractController
             // Stocker les information dans BDD
             $order = new Order();
             $order->setCreatedAt(new DateTime());
+            $order->setState(1);
             $order->setCarrierName($form->get('carriers')->getData()->getName());
             $order->setCarrierPrice($form->get('carriers')->getData()->getPrice());
             $order->setDelivery($addresse);
+            $order->setUser($this->getUser());
             
             foreach ($products as $product){
+                // dd($products);
                 $orderDetail = new OrderDetail();
                 $orderDetail->setProductName($product['object']->getName());
                 $orderDetail->setProductIllustration($product['object']->getIllustration());
