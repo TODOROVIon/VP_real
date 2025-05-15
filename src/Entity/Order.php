@@ -19,6 +19,9 @@ class Order
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
+    
+    #[ORM\Column]
+    private ?int $state = null;
 
     #[ORM\Column(length: 255)]
     private ?string $carrierName = null;
@@ -34,6 +37,7 @@ class Order
      */
     #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'myOrder', cascade:['persist'])]
     private Collection $orderDetails;
+
 
     public function __construct()
     {
@@ -53,6 +57,18 @@ class Order
     public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getState(): ?int
+    {
+        return $this->state;
+    }
+
+    public function setState(int $state): static
+    {
+        $this->state = $state;
 
         return $this;
     }
@@ -122,4 +138,6 @@ class Order
 
         return $this;
     }
+
+    
 }
