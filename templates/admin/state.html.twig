@@ -1,0 +1,8 @@
+{% if field.value == 1 %}
+    <span class="bagde text-bg-secondary">En attente de payement</span>
+{% elseif field.value == 2 %}
+    <span class="bagde text-bg-success">Payement validé</span>
+{% elseif field.value == 3 %}
+    <span class="bagde text-bg-info">Commande expediée</span>
+{% endif %}
+
